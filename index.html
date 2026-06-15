@@ -109,17 +109,17 @@
         ::-webkit-scrollbar-thumb { background-color: var(--scroll-thumb-color); border-radius: .5rem; }
 
         /* Sidebar Nav */
-        .sidebar { position: fixed; width: 100px; height: 100vh; background-color: rgba(10, 10, 15, 0.95); border-right: 1px solid var(--box-color); transition: .4s; z-index: var(--z-fixed); backdrop-filter: blur(10px); }
-        .nav-logo { position: absolute; left: 0; right: 0; top: 1.8rem; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--skin-color), var(--skin-color-light)); text-align: center; margin: auto; box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3); }
+        .sidebar { position: fixed; width: 100px; height: 100vh; background-color: rgba(10, 10, 15, 0.95); border-right: 1px solid var(--box-color); transition: .4s; z-index: var(--z-fixed); back[...]
+        .nav-logo { position: absolute; left: 0; right: 0; top: 1.8rem; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--skin-color), var(--skin-color-ligh[...]
         .nav-logo-text { font-size: 1.125rem; color: var(--title-color); font-weight: var(--font-bold); line-height: 40px; }
         .nav-menu { position: fixed; transform: rotate(-90deg) translateX(-100%); transform-origin: left top; width: 100vh; }
         .menu { display: flex; }
         .nav-list { display: flex; flex-direction: row-reverse; margin: -2px auto 0 auto; }
         .nav-link { float: right; height: 100%; line-height: 100px; padding: 0 1rem; color: var(--title-color); font-weight: var(--font-medium); position: relative; transition: .4s; }
-        .nav-toggle { height: 32px; width: 36px; cursor: pointer; position: fixed; right: 1.5rem; top: 2rem; font-size: 1.2rem; border-radius: .25rem; background: linear-gradient(135deg, var(--skin-color), var(--skin-color-light)); color: var(--title-color); display: none; justify-content: center; align-items: center; z-index: 999; box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3); }
+        .nav-toggle { height: 32px; width: 36px; cursor: pointer; position: fixed; right: 1.5rem; top: 2rem; font-size: 1.2rem; border-radius: .25rem; background: linear-gradient(135deg, var(--sk[...]
         .nav-close { font-size: 1.5rem; position: absolute; top: 1rem; right: 1.25rem; cursor: pointer; display: none; color: var(--title-color); }
         .nav-link.active-link, .nav-link:hover { color: var(--skin-color); }
-        .nav-link.active-link::after, .nav-link:hover::after { position: absolute; content: ''; width: 6px; height: 6px; background-color: var(--skin-color); border-radius: 50%; bottom: 1.8rem; left: 0; right: 0; margin: auto; box-shadow: 0 0 15px var(--skin-color); }
+        .nav-link.active-link::after, .nav-link:hover::after { position: absolute; content: ''; width: 6px; height: 6px; background-color: var(--skin-color); border-radius: 50%; bottom: 1.8rem; l[...]
         .btn-share { position: absolute; bottom: 1.8rem; left: 0; right: 0; text-align: center; cursor: pointer; color: var(--title-color); }
         .social-share { font-size: 1.5rem; transition: .3s; }
         .social-share:hover { color: var(--skin-color); transform: scale(1.2); }
@@ -129,14 +129,27 @@
 
         /* Home Section */
         .home { 
-            background: linear-gradient(135deg, rgba(10, 10, 15, 0.95), rgba(255, 0, 110, 0.1)), 
-                        url('https://wallpapercave.com/wp/wp8038880.jpg'); 
-            background-size: cover; 
-            background-position: center center; 
-            background-attachment: fixed; 
             height: 100vh; 
             position: relative;
             overflow: hidden;
+        }
+        .home-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .home-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.95), rgba(255, 0, 110, 0.1));
+            z-index: 0.5;
         }
         .home::before {
             content: '';
@@ -148,6 +161,7 @@
             top: -100px;
             right: -100px;
             animation: float 20s ease-in-out infinite;
+            z-index: 0.7;
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -159,11 +173,11 @@
         .home-social-follow::after { content: ''; position: absolute; width: 1rem; height: 2px; background: linear-gradient(90deg, var(--text-color), transparent); right: -45%; top: 50%; }
         .home-social-links { display: inline-flex; column-gap: 1rem; }
         .home-social-link { font-size: 1.08rem; color: var(--text-color); transition: .4s; position: relative; }
-        .home-social-link::before { content: ''; position: absolute; width: 30px; height: 30px; background: rgba(255, 0, 110, 0.1); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; transition: .4s; z-index: -1; }
+        .home-social-link::before { content: ''; position: absolute; width: 30px; height: 30px; background: rgba(255, 0, 110, 0.1); border-radius: 50%; top: 50%; left: 50%; transform: translate(-[...]
         .home-social-link:hover { transform: translateY(.25rem) scale(1.1); color: var(--skin-color); }
         .home-social-link:hover::before { opacity: 1; }
         .home-img { display: none; }
-        .home-title { font-size: var(--biggest-font-size); background: linear-gradient(135deg, var(--title-color), var(--skin-color-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeInUp 1s ease; }
+        .home-title { font-size: var(--biggest-font-size); background: linear-gradient(135deg, var(--title-color), var(--skin-color-light)); -webkit-background-clip: text; -webkit-text-fill-color[...]
         .home-subtitle { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb075); color: var(--skin-color-light); animation: fadeInUp 1.2s ease; }
         .home-description { max-width: 450px; margin-bottom: var(--mb2); animation: fadeInUp 1.4s ease; }
         .my-info { display: flex; column-gap: 1.8rem; position: absolute; left: 0; bottom: 1.8rem; animation: slideInUp 0.8s ease; }
@@ -192,14 +206,14 @@
         .about-heading { font-size: var(--h3-font-size); margin-bottom: var(--mb075); }
         .about-description { text-align: justify; padding-right: 6rem; margin-bottom: var(--mb2); line-height: 1.8; }
         .about-info { display: grid; grid-template-columns: repeat(3, 140px); column-gap: .5rem; margin-bottom: var(--mb3); }
-        .about-box { text-align: center; border-radius: .25rem; padding: 1rem 1.25rem; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); backdrop-filter: blur(10px); border: 1px solid rgba(255, 0, 110, 0.1); transition: .3s; }
+        .about-box { text-align: center; border-radius: .25rem; padding: 1rem 1.25rem; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); backdrop-filter: blur(10px);[...]
         .about-box:hover { transform: translateY(-5px); border-color: var(--skin-color); box-shadow: 0 10px 30px rgba(255, 0, 110, 0.1); }
         .about-icon { font-size: 1.5rem; color: var(--skin-color); margin-bottom: var(--mb075); }
         .about-title, .about-subtitle { font-size: var(--small-font-size); }
 
         /* Skills Section */
         .skills-container { grid-template-columns: 360px 320px; column-gap: 3rem; justify-content: center; }
-        .skills-header { display: flex; align-items: center; cursor: pointer; margin-bottom: var(--mb25); padding: 1rem; border-radius: .5rem; background: rgba(255, 0, 110, 0.05); transition: .3s; }
+        .skills-header { display: flex; align-items: center; cursor: pointer; margin-bottom: var(--mb25); padding: 1rem; border-radius: .5rem; background: rgba(255, 0, 110, 0.05); transition: .3s[...]
         .skills-header:hover { background: rgba(255, 0, 110, 0.1); }
         .skills-icon, .skills-arrow { font-size: 2rem; color: var(--skin-color); }
         .skills-icon { margin-right: var(--mb075); }
@@ -222,8 +236,8 @@
         .work-item { cursor: pointer; color: var(--title-color); padding: 0.25rem .75rem; font-weight: var(--font-medium); border-radius: .5rem; transition: .3s; position: relative; }
         .work-item::after { content: ''; position: absolute; width: 0; height: 2px; background: var(--skin-color); bottom: 0; left: 50%; transition: .3s; }
         .work-item:hover::after { width: 100%; left: 0; }
-        .work-card { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 1.25rem; border-radius: .5rem; position: relative; border: 1px solid rgba(255, 0, 110, 0.1); overflow: hidden; transition: .4s; }
-        .work-card::before { content: ''; position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, transparent, rgba(255, 0, 110, 0.1)); opacity: 0; top: 0; left: 0; transition: .4s; }
+        .work-card { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 1.25rem; border-radius: .5rem; position: relative; border: 1px solid rgba(255, 0, 110[...]
+        .work-card::before { content: ''; position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, transparent, rgba(255, 0, 110, 0.1)); opacity: 0; top: 0; left: 0; tra[...]
         .work-card:hover { transform: translateY(-10px); border-color: var(--skin-color); box-shadow: 0 15px 40px rgba(255, 0, 110, 0.2); }
         .work-card:hover::before { opacity: 1; }
         .portfolio-item-details { display: none; }
@@ -236,9 +250,9 @@
         .active-work { background: linear-gradient(135deg, var(--skin-color), var(--skin-color-light)); color: var(--title-color); box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3); }
 
         /* Portfolio Popup Modals */
-        .portfolio-popup { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .9); display: flex; justify-content: center; align-items: center; padding: 0 1rem; opacity: 0; visibility: hidden; z-index: var(--z-modal); transition: .4s; backdrop-filter: blur(5px); }
+        .portfolio-popup { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .9); display: flex; justify-content: center; align-items: center; padding: 0 1rem[...]
         .portfolio-popup.open { opacity: 1; visibility: visible; }
-        .portfolio-popup-inner { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); width: 900px; border-radius: .5rem; padding: 2.5rem; position: relative; border: 1px solid rgba(255, 0, 110, 0.1); }
+        .portfolio-popup-inner { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); width: 900px; border-radius: .5rem; padding: 2.5rem; position: relative; border: 1[...]
         .portfolio-popup-content { grid-template-columns: repeat(2, 1fr); align-items: center; column-gap: 3rem; }
         .portfolio-popup-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: var(--skin-color); cursor: pointer; transition: .3s; }
         .portfolio-popup-close:hover { transform: rotate(90deg); }
@@ -253,7 +267,7 @@
 
         /* Services Section */
         .services-container { grid-template-columns: repeat(3, 250px); justify-content: center; column-gap: 1.8rem; }
-        .services-content { position: relative; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 6rem 0 2rem 2.5rem; border-radius: .25rem; border: 1px solid rgba(255, 0, 110, 0.1); transition: .4s; }
+        .services-content { position: relative; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 6rem 0 2rem 2.5rem; border-radius: .25rem; border: 1px sol[...]
         .services-content:hover { transform: translateY(-10px); border-color: var(--skin-color); box-shadow: 0 15px 40px rgba(255, 0, 110, 0.15); }
         .services-icon { display: block; font-size: 1.8rem; color: var(--skin-color); margin-bottom: var(--mb1); transition: .3s; }
         .services-content:hover .services-icon { transform: scale(1.2); }
@@ -263,9 +277,9 @@
         .services-button:hover .services-button-icon { transform: translateX(.25rem); }
         
         /* Services Modal Window Styles */
-        .services-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .9); display: flex; justify-content: center; align-items: center; padding: 0 1rem; z-index: var(--z-modal); opacity: 0; visibility: hidden; transition: .4s; backdrop-filter: blur(5px); }
+        .services-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .9); display: flex; justify-content: center; align-items: center; padding: 0 1rem;[...]
         .active-modal { opacity: 1; visibility: visible; }
-        .services-modal-content { width: 500px; position: relative; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 4.5rem 2.5rem 2.5rem; border-radius: .5rem; border: 1px solid rgba(255, 0, 110, 0.1); }
+        .services-modal-content { width: 500px; position: relative; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 4.5rem 2.5rem 2.5rem; border-radius: .[...]
         .services-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: var(--skin-color); cursor: pointer; transition: .3s; }
         .services-modal-close:hover { transform: rotate(90deg); }
         .services-modal-title, .services-modal-description { text-align: center; }
@@ -279,7 +293,7 @@
         /* Contact Section */
         .contact-container { grid-template-columns: 300px 340px; column-gap: 3rem; justify-content: center; align-items: center; }
         .contact-info { display: grid; row-gap: 1rem; }
-        .contact-card { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 1rem; border-radius: .5rem; text-align: center; border: 1px solid rgba(255, 0, 110, 0.1); transition: .3s; }
+        .contact-card { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 1rem; border-radius: .5rem; text-align: center; border: 1px solid rgba(255, 0, 110[...]
         .contact-card:hover { transform: translateY(-5px); border-color: var(--skin-color); box-shadow: 0 10px 30px rgba(255, 0, 110, 0.1); }
         .contact-card-icon { font-size: 1.8rem; color: var(--title-color); margin-bottom: var(--mb025); }
         .contact-card-title, .contact-card-data { font-size: var(--small-font-size); }
@@ -290,14 +304,14 @@
         .contact-button:hover .contact-button-icon { transform: translateX(.25rem); }
         
         .input-container { position: relative; margin-top: 1rem; margin-bottom: 1.9rem; }
-        .input { width: 100%; border: 2px solid var(--text-color); background-color: transparent; padding: 0.6rem 1.2rem; color: var(--title-color); font-weight: var(--font-medium); font-size: var(--normal-font-size); letter-spacing: .5px; border-radius: .5rem; outline: none; transition: .4s; }
+        .input { width: 100%; border: 2px solid var(--text-color); background-color: transparent; padding: 0.6rem 1.2rem; color: var(--title-color); font-weight: var(--font-medium); font-size: va[...]
         .input:focus { border-color: var(--skin-color); box-shadow: 0 0 20px rgba(255, 0, 110, 0.2); }
         textarea.input { padding: 0.8rem 1.2rem; min-height: 140px; border-radius: .5rem; resize: none; font-family: var(--body-font); }
-        .input-container label { position: absolute; top: 50%; left: 1rem; transform: translateY(-50%); padding: 0 .4rem; color: var(--text-color); font-size: 1rem; font-weight: var(--font-medium); pointer-events: none; z-index: 15; transition: .5s; }
+        .input-container label { position: absolute; top: 50%; left: 1rem; transform: translateY(-50%); padding: 0 .4rem; color: var(--text-color); font-size: 1rem; font-weight: var(--font-medium[...]
         .input-container.textarea label { top: 1rem; transform: translateY(0); }
-        .input-container span { position: absolute; top: 0; left: 25px; transform: translateY(-50%); font-size: var(--small-font-size); padding: 0 .4rem; pointer-events: none; z-index: var(--z-fixed); color: transparent; }
+        .input-container span { position: absolute; top: 0; left: 25px; transform: translateY(-50%); font-size: var(--small-font-size); padding: 0 .4rem; pointer-events: none; z-index: var(--z-fi[...]
         
-        .input-container span::before, .input-container span::after { content: ''; position: absolute; width: 10%; opacity: 0; height: 5px; background-color: var(--body-color); top: 50%; transform: translateY(-50%); transition: .4s; }
+        .input-container span::before, .input-container span::after { content: ''; position: absolute; width: 10%; opacity: 0; height: 5px; background-color: var(--body-color); top: 50%; transfor[...]
         .input-container span::before { left: 50%; }
         .input-container span::after { right: 50%; }
         .input-container.focus label { top: 0; transform: translateY(-50%); left: 25px; font-size: var(--smaller-font-size); color: var(--skin-color); }
@@ -308,7 +322,7 @@
         .footer { padding-top: 2rem; }
         .footer-container { grid-template-columns: repeat(3, 1fr); column-gap: 1.6rem; }
         .footer-bg { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 3rem 0 3.5rem; border-top: 1px solid rgba(255, 0, 110, 0.1); }
-        .footer-title { font-size: var(--h1-font-size); margin-bottom: var(--mb025); background: linear-gradient(135deg, var(--title-color), var(--skin-color-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer-title { font-size: var(--h1-font-size); margin-bottom: var(--mb025); background: linear-gradient(135deg, var(--title-color), var(--skin-color-light)); -webkit-background-clip: tex[...]
         .footer-subtitle { font-size: var(--small-font-size); color: var(--skin-color); }
         .footer-links { display: flex; justify-self: center; column-gap: 2rem; }
         .footer-link { transition: .3s; }
@@ -443,6 +457,14 @@
         
         <!-- Home Section -->
         <section class="home" id="home">
+            <!-- Video Background -->
+            <video class="home-video-bg" autoplay muted loop playsinline>
+                <source src="your-metahuman-video.mp4" type="video/mp4">
+                <source src="your-metahuman-video.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+            <div class="home-overlay"></div>
+            
             <div class="home-container container grid">
                 <div class="home-social">
                     <span class="home-social-follow">Follow Me</span>
@@ -457,7 +479,7 @@
                 <div class="home-data">
                     <h1 class="home-title">VFX Artist & Compositor</h1>
                     <h3 class="home-subtitle">Turning imagination into cinematic reality</h3>
-                    <p class="home-description">A self-taught VFX and CGI enthusiast who transforms creative visions into stunning digital narratives. Specializing in node-based compositing, 3D integration, and high-end CGI for film and commercial productions.</p>
+                    <p class="home-description">A self-taught VFX and CGI enthusiast who transforms creative visions into stunning digital narratives. Specializing in node-based compositing, 3D i[...]
                     <a href="#contact" class="button"><i class="ri-mail-send-line"></i> Hire Me</a>
                 </div>
 
@@ -487,7 +509,7 @@
                 <img src="https://i.pinimg.com/736x/9f/a8/bb/9fa8bb8b6e9f015e9dd525f4b5beab81.jpg" alt="About Profile Image" class="about-img">
                 <div class="about-data">
                     <h3 class="about-heading">Crafting stunning visual narratives</h3>
-                    <p class="about-description">I am a self-taught Visual Effects Artist dedicated to blending technical workflows with raw creative visions. With internet mentors and trial-by-fire rendering crashes, I've learned to transform impossible shots into reality. Experienced with Node-based compositing systems and 3D integration environments, I have an absolute refusal to accept that a shot can't be fixed in post. Let's create some cool digital chaos together! 🚀</p>
+                    <p class="about-description">I am a self-taught Visual Effects Artist dedicated to blending technical workflows with raw creative visions. With internet mentors and trial-by-f[...]
                     
                     <div class="about-info">
                         <div class="about-box">
@@ -998,13 +1020,17 @@
             });
         });
 
-        /* Input Float Field Focus Animations */
+        /* Input Labels Focus Styling */
         const inputs = document.querySelectorAll('.input');
-        function focusFunc() { let parent = this.parentNode; parent.classList.add('focus'); }
-        function blurFunc() { let parent = this.parentNode; if(this.value == "") { parent.classList.remove('focus'); } }
-        inputs.forEach(input => {
-            input.addEventListener('focus', focusFunc);
-            input.addEventListener('blur', blurFunc);
+        inputs.forEach((input) => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focus');
+            });
+            input.addEventListener('blur', () => {
+                if(input.value === '') {
+                    input.parentElement.classList.remove('focus');
+                }
+            });
         });
     </script>
 </body>
