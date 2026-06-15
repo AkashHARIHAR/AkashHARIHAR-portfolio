@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash HARIHAR - VFX & CGI Artist Portfolio</title>
+    
+    <!-- External UI Elements & Icon Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
+        
+        :root {
+            --hue-color: 242;
+            --skin-color: #ff006e;
+            --skin-color-light: #ff4d8f;
+            --mirage-color: hsl(210, 10%, 23%);
+            --title-color: hsl(var(--hue-color), 8%, 95%);
+            --text-color: hsl(var(--hue-color), 8%, 85%);
+            --body-color: #0a0a0f;
+            --box-color: hsl(var(--hue-color), 14%, 10%);
+            --scroll-box-color: hsl(var(--hue-color), 12%, 38%);
+            --scroll-thumb-color: hsl(var(--hue-color), 12%, 26%);
+            --body-font: 'Poppins', sans-serif;
+            --signature-font: 'Turret Road', sans-serif;
+            --biggest-font-size: 3rem;
+            --h1-font-size: 2.25rem;
+            --h2-font-size: 1.5rem;
+            --h3-font-size: 1.25rem;
+            --normal-font-size: 1rem;
+            --small-font-size: .875rem;
+            --smaller-font-size: .813rem;
+            --font-medium: 500;
+            --font-bold: 600;
+            --mb025: .25rem;
+            --mb05: .5rem;
+            --mb075: .75rem;
+            --mb1: 1rem;
+            --mb15: 1.5rem;
+            --mb2: 2rem;
+            --mb25: 2.5rem;
+            --mb3: 3rem;
+            --z-fixed: 10;
+            --z-modal: 100;
+        }
+
+        @media screen and (max-width: 1024px) {
+            :root {
+                --biggest-font-size: 2rem;
+                --h1-font-size: 1.5rem;
+                --h2-font-size: 1.25rem;
+                --h3-font-size: 1.125rem;
+                --normal-font-size: .938rem;
+                --small-font-size: .813rem;
+                --smaller-font-size: .75rem;
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body, button, input { font-family: var(--body-font); font-size: var(--normal-font-size); }
+        body { background-color: var(--body-color); color: var(--text-color); overflow-x: hidden; }
+        h1, h2, h3 { color: var(--title-color); font-weight: var(--font-bold); }
+        ul { list-style: none; }
+        a { text-decoration: none; }
+        img { max-width: 100%; height: auto; }
+        button { cursor: pointer; border: none; outline: none; }
+        input, textarea { border: none; outline: none; }
+        
+        .container { max-width: 1250px; margin-left: auto; margin-right: auto; }
+        .grid { display: grid; }
+        
+        .button {
+            display: inline-flex;
+            align-items: center;
+            column-gap: .5rem;
+            background: linear-gradient(135deg, var(--skin-color), var(--skin-color-light));
+            color: var(--title-color);
+            padding: 0.75rem 1.4rem;
+            border-radius: .25rem;
+            font-weight: var(--font-medium);
+            position: relative;
+            z-index: 1;
+            transition: .4s;
+            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
+        }
+        .button::after {
+            position: absolute;
+            content: ''; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: var(--mirage-color);
+            z-index: -1; transform-origin: center; transform: scale(0);
+            border-radius: .25rem; transition: .3s;
+        }
+        .button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 0, 110, 0.4); }
+        .button:hover::after { transform: scale(1); }
+        
+        .section { padding: 6.5rem 0 2rem; }
+        .section-title { text-align: center; font-size: var(--h1-font-size); margin-bottom: var(--mb3); }
+        .section-title::before {
+            content: attr(data-heading); display: block;
+            font-size: var(--normal-font-size); font-weight: var(--font-medium); color: var(--skin-color);
+            letter-spacing: 2px;
+            margin-bottom: var(--mb1);
+        }
+
+        ::-webkit-scrollbar { width: 0.6rem; background-color: var(--scroll-box-color); border-radius: .5rem; }
+        ::-webkit-scrollbar-thumb { background-color: var(--scroll-thumb-color); border-radius: .5rem; }
+
+        /* Sidebar Nav */
+        .sidebar { position: fixed; width: 100px; height: 100vh; background-color: rgba(10, 10, 15, 0.95); border-right: 1px solid var(--box-color); transition: .4s; z-index: var(--z-fixed); backdrop-filter: blur(10px); }
+        .nav-logo { position: absolute; left: 0; right: 0; top: 1.8rem; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--skin-color), var(--skin-color-light)); text-align: center; margin: auto; box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3); }
+        .nav-logo-text { font-size: 1.125rem; color: var(--title-color); font-weight: var(--font-bold); line-height: 40px; }
+        .nav-menu { position: fixed; transform: rotate(-90deg) translateX(-100%); transform-origin: left top; width: 100vh; }
+        .menu { display: flex; }
+        .nav-list { display: flex; flex-direction: row-reverse; margin: -2px auto 0 auto; }
+        .nav-link { float: right; height: 100%; line-height: 100px; padding: 0 1rem; color: var(--title-color); font-weight: var(--font-medium); position: relative; transition: .4s; }
+        .nav-toggle { height: 32px; width: 36px; cursor: pointer; position: fixed; right: 1.5rem; top: 2rem; font-size: 1.2rem; border-radius: .25rem; background: linear-gradient(135deg, var(--skin-color), var(--skin-color-light)); color: var(--title-color); display: none; justify-content: center; align-items: center; z-index: 999; box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3); }
+        .nav-close { font-size: 1.5rem; position: absolute; top: 1rem; right: 1.25rem; cursor: pointer; display: none; color: var(--title-color); }
+        .nav-link.active-link, .nav-link:hover { color: var(--skin-color); }
+        .nav-link.active-link::after, .nav-link:hover::after { position: absolute; content: ''; width: 6px; height: 6px; background-color: var(--skin-color); border-radius: 50%; bottom: 1.8rem; left: 0; right: 0; margin: auto; box-shadow: 0 0 15px var(--skin-color); }
+        .btn-share { position: absolute; bottom: 1.8rem; left: 0; right: 0; text-align: center; cursor: pointer; color: var(--title-color); }
+        .social-share { font-size: 1.5rem; transition: .3s; }
+        .social-share:hover { color: var(--skin-color); transform: scale(1.2); }
+
+        /* Main View Container */
+        .main { margin-left: 100px; }
+
+        /* Home Section */
+        .home { 
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.95), rgba(255, 0, 110, 0.1)), 
+                        url('https://wallpapercave.com/wp/wp8038880.jpg'); 
+            background-size: cover; 
+            background-position: center center; 
+            background-attachment: fixed; 
+            height: 100vh; 
+            position: relative;
+            overflow: hidden;
+        }
+        .home::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 0, 110, 0.1), transparent);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 20s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+        .home-container { position: relative; height: 100%; align-items: center; z-index: 1; }
+        .home-social { position: absolute; top: 1.8rem; left: 0; display: flex; align-items: center; column-gap: 3.5rem; animation: slideInLeft 0.8s ease; }
+        .home-social-follow { font-weight: var(--font-medium); }
+        .home-social-follow::after { content: ''; position: absolute; width: 1rem; height: 2px; background: linear-gradient(90deg, var(--text-color), transparent); right: -45%; top: 50%; }
+        .home-social-links { display: inline-flex; column-gap: 1rem; }
+        .home-social-link { font-size: 1.08rem; color: var(--text-color); transition: .4s; position: relative; }
+        .home-social-link::before { content: ''; position: absolute; width: 30px; height: 30px; background: rgba(255, 0, 110, 0.1); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; transition: .4s; z-index: -1; }
+        .home-social-link:hover { transform: translateY(.25rem) scale(1.1); color: var(--skin-color); }
+        .home-social-link:hover::before { opacity: 1; }
+        .home-img { display: none; }
+        .home-title { font-size: var(--biggest-font-size); background: linear-gradient(135deg, var(--title-color), var(--skin-color-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeInUp 1s ease; }
+        .home-subtitle { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb075); color: var(--skin-color-light); animation: fadeInUp 1.2s ease; }
+        .home-description { max-width: 450px; margin-bottom: var(--mb2); animation: fadeInUp 1.4s ease; }
+        .my-info { display: flex; column-gap: 1.8rem; position: absolute; left: 0; bottom: 1.8rem; animation: slideInUp 0.8s ease; }
+        .info-item { display: flex; align-items: center; }
+        .info-title, .info-subtitle { font-size: var(--small-font-size); }
+        .info-title { font-weight: var(--font-medium); }
+        .info-icon { font-size: 1.8rem; color: var(--skin-color); margin-right: var(--mb075); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* About Section */
+        .about-container { grid-template-columns: repeat(2, 1fr); column-gap: 4rem; align-items: center; }
+        .about-img { width: 480px; border-radius: .75rem; justify-self: center; box-shadow: 0 20px 60px rgba(255, 0, 110, 0.2); transition: .4s; }
+        .about-img:hover { transform: translateY(-10px); box-shadow: 0 30px 80px rgba(255, 0, 110, 0.3); }
+        .about-heading { font-size: var(--h3-font-size); margin-bottom: var(--mb075); }
+        .about-description { text-align: justify; padding-right: 6rem; margin-bottom: var(--mb2); line-height: 1.8; }
+        .about-info { display: grid; grid-template-columns: repeat(3, 140px); column-gap: .5rem; margin-bottom: var(--mb3); }
+        .about-box { text-align: center; border-radius: .25rem; padding: 1rem 1.25rem; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); backdrop-filter: blur(10px); border: 1px solid rgba(255, 0, 110, 0.1); transition: .3s; }
+        .about-box:hover { transform: translateY(-5px); border-color: var(--skin-color); box-shadow: 0 10px 30px rgba(255, 0, 110, 0.1); }
+        .about-icon { font-size: 1.5rem; color: var(--skin-color); margin-bottom: var(--mb075); }
+        .about-title, .about-subtitle { font-size: var(--small-font-size); }
+
+        /* Skills Section */
+        .skills-container { grid-template-columns: 360px 320px; column-gap: 3rem; justify-content: center; }
+        .skills-header { display: flex; align-items: center; cursor: pointer; margin-bottom: var(--mb25); padding: 1rem; border-radius: .5rem; background: rgba(255, 0, 110, 0.05); transition: .3s; }
+        .skills-header:hover { background: rgba(255, 0, 110, 0.1); }
+        .skills-icon, .skills-arrow { font-size: 2rem; color: var(--skin-color); }
+        .skills-icon { margin-right: var(--mb075); }
+        .skills-arrow { margin-left: auto; transition: .4s; }
+        .skills-active .skills-arrow { transform: rotate(-90deg); }
+        .skills-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); }
+        .skills-subtitle { font-size: var(--small-font-size); }
+        .skills-list { row-gap: 1.8rem; }
+        .skills-titles { display: flex; justify-content: space-between; margin-bottom: var(--mb05); }
+        .skills-name { font-size: var(--normal-font-size); font-weight: var(--font-medium); }
+        .skills-bar, .skills-percentage { height: 5px; border-radius: .25rem; }
+        .skills-bar { background-color: var(--box-color); position: relative; }
+        .skills-percentage { display: block; background: linear-gradient(90deg, var(--skin-color), var(--skin-color-light)); height: 100%; }
+        .skills [data-content] { display: none; }
+        .skills-active[data-content] { display: block; }
+
+        /* Work / Portfolio Section */
+        .work-container { grid-template-columns: repeat(3, 330px); gap: 1.8rem; justify-content: center; padding-top: 1rem; }
+        .work-filters { display: flex; justify-content: center; align-items: center; column-gap: .75rem; margin-bottom: 2rem; }
+        .work-item { cursor: pointer; color: var(--title-color); padding: 0.25rem .75rem; font-weight: var(--font-medium); border-radius: .5rem; transition: .3s; position: relative; }
+        .work-item::after { content: ''; position: absolute; width: 0; height: 2px; background: var(--skin-color); bottom: 0; left: 50%; transition: .3s; }
+        .work-item:hover::after { width: 100%; left: 0; }
+        .work-card { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 1.25rem; border-radius: .5rem; position: relative; border: 1px solid rgba(255, 0, 110, 0.1); overflow: hidden; transition: .4s; }
+        .work-card::before { content: ''; position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, transparent, rgba(255, 0, 110, 0.1)); opacity: 0; top: 0; left: 0; transition: .4s; }
+        .work-card:hover { transform: translateY(-10px); border-color: var(--skin-color); box-shadow: 0 15px 40px rgba(255, 0, 110, 0.2); }
+        .work-card:hover::before { opacity: 1; }
+        .portfolio-item-details { display: none; }
+        .work-img { border-radius: .5rem; margin-bottom: var(--mb1); width: 100%; height: 200px; object-fit: cover; transition: .4s; }
+        .work-card:hover .work-img { transform: scale(1.05); }
+        .work-title { font-size: var(--normal-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb05); }
+        .work-button { color: var(--skin-color); font-size: var(--small-font-size); display: inline-flex; align-items: center; column-gap: .25rem; cursor: pointer; transition: .3s; }
+        .work-button-icon { font-size: 1rem; transition: .4s; }
+        .work-button:hover .work-button-icon { transform: translateX(.25rem); }
+        .active-work { background: linear-gradient(135deg, var(--skin-color), var(--skin-color-light)); color: var(--title-color); box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3); }
+
+        /* Portfolio Popup Modals */
+        .portfolio-popup { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .9); display: flex; justify-content: center; align-items: center; padding: 0 1rem; opacity: 0; visibility: hidden; z-index: var(--z-modal); transition: .4s; backdrop-filter: blur(5px); }
+        .portfolio-popup.open { opacity: 1; visibility: visible; }
+        .portfolio-popup-inner { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); width: 900px; border-radius: .5rem; padding: 2.5rem; position: relative; border: 1px solid rgba(255, 0, 110, 0.1); }
+        .portfolio-popup-content { grid-template-columns: repeat(2, 1fr); align-items: center; column-gap: 3rem; }
+        .portfolio-popup-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: var(--skin-color); cursor: pointer; transition: .3s; }
+        .portfolio-popup-close:hover { transform: rotate(90deg); }
+        .portfolio-popup-img { border-radius: .5rem; width: 100%; max-height: 350px; object-fit: cover; }
+        .portfolio-popup-subtitle { font-size: var(--smaller-font-size); margin-bottom: var(--mb025); color: var(--skin-color); }
+        .details-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb1); }
+        .details-description { font-size: var(--small-font-size); margin-bottom: var(--mb2); line-height: 1.6; }
+        .details-info li { margin-bottom: var(--mb075); text-transform: capitalize; font-size: var(--small-font-size); }
+        .details-info li:last-child { margin-bottom: 0; }
+        .details-info li span { font-weight: normal; color: var(--text-color); }
+        .details-info li a { text-transform: lowercase; color: var(--skin-color); }
+
+        /* Services Section */
+        .services-container { grid-template-columns: repeat(3, 250px); justify-content: center; column-gap: 1.8rem; }
+        .services-content { position: relative; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 6rem 0 2rem 2.5rem; border-radius: .25rem; border: 1px solid rgba(255, 0, 110, 0.1); transition: .4s; }
+        .services-content:hover { transform: translateY(-10px); border-color: var(--skin-color); box-shadow: 0 15px 40px rgba(255, 0, 110, 0.15); }
+        .services-icon { display: block; font-size: 1.8rem; color: var(--skin-color); margin-bottom: var(--mb1); transition: .3s; }
+        .services-content:hover .services-icon { transform: scale(1.2); }
+        .services-title { font-size: var(--h3-font-size); margin-bottom: var(--mb1); font-weight: var(--font-medium); }
+        .services-button { color: var(--skin-color); font-size: var(--small-font-size); display: flex; align-items: center; column-gap: .25rem; cursor: pointer; }
+        .services-button-icon { font-size: 1rem; transition: .4s; }
+        .services-button:hover .services-button-icon { transform: translateX(.25rem); }
+        
+        /* Services Modal Window Styles */
+        .services-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .9); display: flex; justify-content: center; align-items: center; padding: 0 1rem; z-index: var(--z-modal); opacity: 0; visibility: hidden; transition: .4s; backdrop-filter: blur(5px); }
+        .active-modal { opacity: 1; visibility: visible; }
+        .services-modal-content { width: 500px; position: relative; background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 4.5rem 2.5rem 2.5rem; border-radius: .5rem; border: 1px solid rgba(255, 0, 110, 0.1); }
+        .services-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: var(--skin-color); cursor: pointer; transition: .3s; }
+        .services-modal-close:hover { transform: rotate(90deg); }
+        .services-modal-title, .services-modal-description { text-align: center; }
+        .services-modal-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb1); }
+        .services-modal-description { font-size: var(--small-font-size); padding: 0 3.5rem; margin-bottom: var(--mb2); }
+        .services-modal-services { row-gap: var(--mb075); display: grid; }
+        .services-modal-service { display: flex; align-items: center; column-gap: .5rem; }
+        .services-modal-icon { color: var(--skin-color); font-size: 1.1rem; }
+        .services-modal-info { font-size: var(--small-font-size); }
+
+        /* Contact Section */
+        .contact-container { grid-template-columns: 300px 340px; column-gap: 3rem; justify-content: center; align-items: center; }
+        .contact-info { display: grid; row-gap: 1rem; }
+        .contact-card { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 1rem; border-radius: .5rem; text-align: center; border: 1px solid rgba(255, 0, 110, 0.1); transition: .3s; }
+        .contact-card:hover { transform: translateY(-5px); border-color: var(--skin-color); box-shadow: 0 10px 30px rgba(255, 0, 110, 0.1); }
+        .contact-card-icon { font-size: 1.8rem; color: var(--title-color); margin-bottom: var(--mb025); }
+        .contact-card-title, .contact-card-data { font-size: var(--small-font-size); }
+        .contact-card-title { font-weight: var(--font-medium); }
+        .contact-card-data { display: block; margin-bottom: var(--mb075); color: var(--text-color); }
+        .contact-button { color: var(--skin-color); font-size: var(--small-font-size); display: flex; align-items: center; justify-content: center; column-gap: .25rem; cursor: pointer; }
+        .contact-button-icon { font-size: 1rem; transition: .4s; }
+        .contact-button:hover .contact-button-icon { transform: translateX(.25rem); }
+        
+        .input-container { position: relative; margin-top: 1rem; margin-bottom: 1.9rem; }
+        .input { width: 100%; border: 2px solid var(--text-color); background-color: transparent; padding: 0.6rem 1.2rem; color: var(--title-color); font-weight: var(--font-medium); font-size: var(--normal-font-size); letter-spacing: .5px; border-radius: .5rem; outline: none; transition: .4s; }
+        .input:focus { border-color: var(--skin-color); box-shadow: 0 0 20px rgba(255, 0, 110, 0.2); }
+        textarea.input { padding: 0.8rem 1.2rem; min-height: 140px; border-radius: .5rem; resize: none; font-family: var(--body-font); }
+        .input-container label { position: absolute; top: 50%; left: 1rem; transform: translateY(-50%); padding: 0 .4rem; color: var(--text-color); font-size: 1rem; font-weight: var(--font-medium); pointer-events: none; z-index: 15; transition: .5s; }
+        .input-container.textarea label { top: 1rem; transform: translateY(0); }
+        .input-container span { position: absolute; top: 0; left: 25px; transform: translateY(-50%); font-size: var(--small-font-size); padding: 0 .4rem; pointer-events: none; z-index: var(--z-fixed); color: transparent; }
+        
+        .input-container span::before, .input-container span::after { content: ''; position: absolute; width: 10%; opacity: 0; height: 5px; background-color: var(--body-color); top: 50%; transform: translateY(-50%); transition: .4s; }
+        .input-container span::before { left: 50%; }
+        .input-container span::after { right: 50%; }
+        .input-container.focus label { top: 0; transform: translateY(-50%); left: 25px; font-size: var(--smaller-font-size); color: var(--skin-color); }
+        .input-container.focus span::before, .input-container.focus span::after { width: 50%; opacity: 1; }
+        .input-container.focus .input { border-color: var(--skin-color); }
+
+        /* Footer Section */
+        .footer { padding-top: 2rem; }
+        .footer-container { grid-template-columns: repeat(3, 1fr); column-gap: 1.6rem; }
+        .footer-bg { background: linear-gradient(135deg, var(--box-color), rgba(255, 0, 110, 0.05)); padding: 3rem 0 3.5rem; border-top: 1px solid rgba(255, 0, 110, 0.1); }
+        .footer-title { font-size: var(--h1-font-size); margin-bottom: var(--mb025); background: linear-gradient(135deg, var(--title-color), var(--skin-color-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer-subtitle { font-size: var(--small-font-size); color: var(--skin-color); }
+        .footer-links { display: flex; justify-self: center; column-gap: 2rem; }
+        .footer-link { transition: .3s; }
+        .footer-link:hover { color: var(--skin-color); }
+        .footer-socials { justify-self: flex-end; }
+        .footer-social { font-size: 1.25rem; margin-right: var(--mb15); color: var(--title-color); transition: .3s; }
+        .footer-social:hover { color: var(--skin-color); transform: scale(1.2); }
+        .footer-copy { font-size: var(--smaller-font-size); text-align: center; margin-top: 4.5rem; color: var(--text-color); }
+        .footer-copy a { font-family: var(--signature-font); color: var(--title-color); transition: .3s; }
+        .footer-copy a:hover { color: var(--skin-color); }
+        .footer-title, .footer-subtitle, .footer-links, .footer-social, .footer-copy a { color: var(--title-color); }
+
+        /* Media Queries Breakdown for Responsiveness */
+        @media screen and (max-width: 1408px) { .container { margin-left: var(--mb25); margin-right: var(--mb25); } }
+        @media screen and (max-width: 1216px) { 
+            .about-container { column-gap: 2.5rem; } 
+            .about-description { padding-right: 0; } 
+            .work-container { grid-template-columns: repeat(2, 330px); gap: 3rem; } 
+        }
+        
+        @media screen and (max-width: 1024px) {
+            .container { margin-left: var(--mb15); margin-right: var(--mb15); }
+            .sidebar { position: fixed; left: 0; top: 0; width: 250px; height: 100vh; transform: translateX(-100%); background-color: var(--box-color); }
+            .sidebar.show-sidebar { transform: translateX(0); }
+            .nav-logo, .btn-share { display: none; }
+            .nav-menu { position: relative; transform: rotate(0deg) translateX(0); width: 100%; height: 100%; display: flex; justify-content: center; }
+            .nav-list { flex-direction: column; height: 100%; justify-content: center; align-items: center; row-gap: 2rem; margin: 0; }
+            .nav-link { float: none; height: auto; line-height: 1.5; padding: 0.5rem 0; font-size: 1.25rem; }
+            .nav-link.active-link::after, .nav-link:hover::after { bottom: -5px; }
+            .nav-close { display: block; }
+            .nav-toggle { display: flex; }
+            .main { margin-left: 0; }
+            .about-container { grid-template-columns: 1fr; row-gap: 2.5rem; }
+            .about-img { width: 350px; }
+            .about-data { text-align: center; }
+            .about-info { justify-content: center; }
+            .about-box { padding: 0.75rem .5rem; }
+            .about-description { padding: 0 4rem; text-align: center; }
+            .skills-container { grid-template-columns: 340px 300px; }
+            .skills-list { row-gap: 1.7rem; }
+            .work-card { padding: 1rem; }
+            .work-img { margin-bottom: var(--mb075); }
+            .work-title { margin-bottom: var(--mb025); }
+            .services-container { grid-template-columns: repeat(3, 220px); }
+            .portfolio-popup-inner { width: 90%; max-width: 750px; padding: 2rem; }
+        }
+
+        @media screen and (max-width: 768px) {
+            .about-img { width: 250px; }
+            .skills-container, .work-container, .contact-container { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+            .skills-container { row-gap: 3rem; }
+            .services-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .services-content { padding: 3.5rem .5rem 1.25rem 1.5rem; }
+            .services-icon { font-size: 1.5rem; }
+            .contact-container { row-gap: 3rem; }
+            .footer-container { grid-template-columns: repeat(2, 1fr); row-gap: 3rem; }
+            .footer-socials { justify-self: start; }
+            .footer-links { flex-direction: column; row-gap: 1.5rem; justify-self: start; }
+            .footer-bg { padding: 2rem 0 3rem; }
+            .footer-copy { margin-top: var(--mb3); }
+            .portfolio-popup-inner { padding: 3rem 1.5rem 1.5rem; }
+            .portfolio-popup-content { grid-template-columns: 1fr; row-gap: 1.6rem; }
+            .details-title { font-size: var(--normal-font-size); }
+            .portfolio-popup-close { top: .5rem; right: .5rem; }
+        }
+
+        @media screen and (max-width: 576px) {
+            .nav-toggle { right: initial; left: 1.5rem; }
+            .home { background-image: none; height: initial; padding: 7rem 0 2rem; }
+            .home-container { row-gap: 2rem; }
+            .home-img { display: block; width: 250px; justify-self: center; border-radius: 1rem; }
+            .my-info { display: none; }
+            .home-social { left: initial; right: -1rem; flex-direction: column; row-gap: 3.5rem; }
+            .home-social-follow { font-size: var(--smaller-font-size); transform: rotate(90deg); }
+            .home-social-links { flex-direction: column; row-gap: .25rem; }
+            .home-social-link { font-size: var(--normal-font-size); }
+            .about-info { grid-template-columns: repeat(3, 1fr); }
+            .about-description { padding: 0; }
+            .services-modal-content { padding: 4.5rem 1.5rem 2.5rem; }
+            .services-modal-description { padding: 0; }
+            .work-container, .contact-container { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; }
+        }
+
+        @media screen and (max-width: 350px) {
+            .container { margin-left: var(--mb1); margin-right: var(--mb1); }
+            .home-img { width: 200px; }
+            .home-title { font-size: var(--h1-font-size); }
+            .home-subtitle { font-size: var(--normal-font-size); }
+            .about-info { grid-template-columns: repeat(2, 1fr); row-gap: .5rem; }
+            .skills-title { font-size: var(--normal-font-size); }
+            .work-item { font-size: var(--normal-font-size); }
+            .work-filters { column-gap: .25rem; }
+            .services-container { grid-template-columns: max-content; }
+            .services-content { padding-right: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-toggle" id="nav-toggle">
+        <i class="ri-menu-line"></i>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="nav-close" id="nav-close">
+            <i class="ri-close-line"></i>
+        </div>
+        <div class="nav-logo">
+            <span class="nav-logo-text">AH</span>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="menu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#work" class="nav-link">Portfolio</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="btn-share">
+            <i class="ri-share-line social-share"></i>
+        </div>
+    </nav>
+
+    <main class="main">
+        
+        <!-- Home Section -->
+        <section class="home" id="home">
+            <div class="home-container container grid">
+                <div class="home-social">
+                    <span class="home-social-follow">Follow Me</span>
+                    <div class="home-social-links">
+                        <a href="https://www.linkedin.com/" class="home-social-link"><i class="ri-linkedin-box-line"></i></a>
+                        <a href="https://www.youtube.com/@FX_AKKUSH" class="home-social-link"><i class="ri-youtube-line"></i></a>
+                        <a href="https://www.instagram.com/" class="home-social-link"><i class="ri-instagram-line"></i></a>
+                    </div>
+                </div>
+
+                <!-- Left Column: Text Information -->
+                <div class="home-data">
+                    <h1 class="home-title">VFX Artist & Compositor</h1>
+                    <h3 class="home-subtitle">Turning imagination into cinematic reality</h3>
+                    <p class="home-description">A self-taught VFX and CGI enthusiast who transforms creative visions into stunning digital narratives. Specializing in node-based compositing, 3D integration, and high-end CGI for film and commercial productions.</p>
+                    <a href="#contact" class="button"><i class="ri-mail-send-line"></i> Hire Me</a>
+                </div>
+
+                <div class="my-info">
+                    <div class="info-item">
+                        <i class="ri-film-line info-icon"></i>
+                        <div>
+                            <h4 class="info-title">50+ Projects</h4>
+                            <span class="info-subtitle">Completed Worldwide</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="ri-award-line info-icon"></i>
+                        <div>
+                            <h4 class="info-title">5 Years</h4>
+                            <span class="info-subtitle">Industry Experience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about section" id="about">
+            <h2 class="section-title" data-heading="My Intro">About Me</h2>
+            <div class="about-container container grid">
+                <img src="https://i.pinimg.com/736x/9f/a8/bb/9fa8bb8b6e9f015e9dd525f4b5beab81.jpg" alt="About Profile Image" class="about-img">
+                <div class="about-data">
+                    <h3 class="about-heading">Crafting stunning visual narratives</h3>
+                    <p class="about-description">I am a self-taught Visual Effects Artist dedicated to blending technical workflows with raw creative visions. With internet mentors and trial-by-fire rendering crashes, I've learned to transform impossible shots into reality. Experienced with Node-based compositing systems and 3D integration environments, I have an absolute refusal to accept that a shot can't be fixed in post. Let's create some cool digital chaos together! 🚀</p>
+                    
+                    <div class="about-info">
+                        <div class="about-box">
+                            <i class="ri-briefcase-line about-icon"></i>
+                            <h3 class="about-title">Experience</h3>
+                            <span class="about-subtitle">5+ Years</span>
+                        </div>
+                        <div class="about-box">
+                            <i class="ri-clapperboard-line about-icon"></i>
+                            <h3 class="about-title">Projects</h3>
+                            <span class="about-subtitle">50+ Completed</span>
+                        </div>
+                        <div class="about-box">
+                            <i class="ri-customer-service-2-line about-icon"></i>
+                            <h3 class="about-title">Support</h3>
+                            <span class="about-subtitle">Online 24/7</span>
+                        </div>
+                    </div>
+                    <a href="#contact" class="button"><i class="ri-chat-3-line"></i> Contact Me</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills section" id="skills">
+            <h2 class="section-title" data-heading="My Abilities">My Skills</h2>
+            <div class="skills-container container grid">
+                <div class="skills-content">
+                    <div class="skills-header skills-active" data-target="#vfx">
+                        <i class="ri-magic-line skills-icon"></i>
+                        <div>
+                            <h1 class="skills-title">VFX Workflows</h1>
+                            <span class="skills-subtitle">Core pipelines</span>
+                        </div>
+                        <i class="ri-arrow-down-s-line skills-arrow"></i>
+                    </div>
+
+                    <div class="skills-list grid skills-active" data-content id="vfx">
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">Compositing (Nuke)</span>
+                                <span class="skills-number">90%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 90%;"></span>
+                            </div>
+                        </div>
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">3D Tracking & Matchmove</span>
+                                <span class="skills-number">85%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 85%;"></span>
+                            </div>
+                        </div>
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">Green Screen Keying</span>
+                                <span class="skills-number">95%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 95%;"></span>
+                            </div>
+                        </div>
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">Rotoscoping & Cleanup</span>
+                                <span class="skills-number">88%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 88%;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-content">
+                    <div class="skills-header" data-target="#software">
+                        <i class="ri-terminal-box-line skills-icon"></i>
+                        <div>
+                            <h1 class="skills-title">Software</h1>
+                            <span class="skills-subtitle">Tools & platforms</span>
+                        </div>
+                        <i class="ri-arrow-down-s-line skills-arrow"></i>
+                    </div>
+
+                    <div class="skills-list grid" data-content id="software">
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">Nuke</span>
+                                <span class="skills-number">92%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 92%;"></span>
+                            </div>
+                        </div>
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">Maya</span>
+                                <span class="skills-number">80%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 80%;"></span>
+                            </div>
+                        </div>
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">After Effects</span>
+                                <span class="skills-number">85%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 85%;"></span>
+                            </div>
+                        </div>
+                        <div class="skills-data">
+                            <div class="skills-titles">
+                                <span class="skills-name">Photoshop</span>
+                                <span class="skills-number">88%</span>
+                            </div>
+                            <div class="skills-bar">
+                                <span class="skills-percentage" style="width: 88%;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Work Section -->
+        <section class="work section" id="work">
+            <h2 class="section-title" data-heading="My Portfolio">Recent Work</h2>
+            <div class="work-filters">
+                <span class="work-item active-work" data-filter="all">All</span>
+                <span class="work-item" data-filter=".cgi">CGI Integration</span>
+                <span class="work-item" data-filter=".compositing">Compositing</span>
+                <span class="work-item" data-filter=".particles">Particles & FX</span>
+            </div>
+
+            <div class="work-container container grid">
+                <!-- Portfolio Card Item 1 -->
+                <div class="work-card mix compositing">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Cinematic Compositing" class="work-img">
+                    <h3 class="work-title">Sci-Fi Integration</h3>
+                    <span class="work-button">View Details <i class="ri-arrow-right-line work-button-icon"></i></span>
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">Sci-Fi Integration Project</h3>
+                        <p class="details-description">Seamless breakdown matching complex multi-pass live action footage with modern CG spaceships and atmospheric effects.</p>
+                        <ul class="details-info">
+                            <li>Client - <span>Independent Studio</span></li>
+                            <li>Technologies - <span>Nuke, Maya, After Effects</span></li>
+                            <li>Category - <span>Film Production</span></li>
+                            <li>Duration - <span>3 minutes</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card Item 2 -->
+                <div class="work-card mix cgi">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500" alt="3D CGI Render" class="work-img">
+                    <h3 class="work-title">3D Character Animation</h3>
+                    <span class="work-button">View Details <i class="ri-arrow-right-line work-button-icon"></i></span>
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">3D Character Animation</h3>
+                        <p class="details-description">Full 3D character rigging, animation, and texturing with realistic lighting and materials using industry-standard pipelines.</p>
+                        <ul class="details-info">
+                            <li>Client - <span>Commercial Brand</span></li>
+                            <li>Technologies - <span>Maya, Arnold, Substance</span></li>
+                            <li>Category - <span>Advertising</span></li>
+                            <li>Format - <span>4K 30fps</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card Item 3 -->
+                <div class="work-card mix particles">
+                    <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=500" alt="Particle Effects" class="work-img">
+                    <h3 class="work-title">Particle Systems & Effects</h3>
+                    <span class="work-button">View Details <i class="ri-arrow-right-line work-button-icon"></i></span>
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">Dynamic Particle Systems</h3>
+                        <p class="details-description">Complex particle simulations including fluid dynamics, smoke, fire, and magical effects integrated into live-action sequences.</p>
+                        <ul class="details-info">
+                            <li>Client - <span>Film Studio</span></li>
+                            <li>Technologies - <span>Houdini, RenderMan</span></li>
+                            <li>Category - <span>Feature Film</span></li>
+                            <li>Complexity - <span>High</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card Item 4 -->
+                <div class="work-card mix compositing">
+                    <img src="https://images.unsplash.com/photo-1590080901022-cb47ed79220d?w=500" alt="Color Grading" class="work-img">
+                    <h3 class="work-title">Color Grading & Grade</h3>
+                    <span class="work-button">View Details <i class="ri-arrow-right-line work-button-icon"></i></span>
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">Professional Color Grading</h3>
+                        <p class="details-description">Complete color correction and grading workflow with LUT development and cinematic look creation for feature content.</p>
+                        <ul class="details-info">
+                            <li>Client - <span>Production House</span></li>
+                            <li>Technologies - <span>DaVinci Resolve, Nuke</span></li>
+                            <li>Category - <span>Post Production</span></li>
+                            <li>Duration - <span>Full Feature</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card Item 5 -->
+                <div class="work-card mix cgi">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8e12a7c6?w=500" alt="VFX Motion" class="work-img">
+                    <h3 class="work-title">Motion Graphics & Animation</h3>
+                    <span class="work-button">View Details <i class="ri-arrow-right-line work-button-icon"></i></span>
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">Motion Graphics Design</h3>
+                        <p class="details-description">High-impact motion graphics, title sequences, and animated graphics for broadcast and digital media applications.</p>
+                        <ul class="details-info">
+                            <li>Client - <span>Media Network</span></li>
+                            <li>Technologies - <span>After Effects, Cinema 4D</span></li>
+                            <li>Category - <span>Broadcast</span></li>
+                            <li>Duration - <span>Various lengths</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card Item 6 -->
+                <div class="work-card mix particles">
+                    <img src="https://images.unsplash.com/photo-1552821121-c36b1e3b38b1?w=500" alt="Lighting FX" class="work-img">
+                    <h3 class="work-title">Lighting & Rendering</h3>
+                    <span class="work-button">View Details <i class="ri-arrow-right-line work-button-icon"></i></span>
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">Advanced Lighting Setups</h3>
+                        <p class="details-description">Professional lighting design and rendering optimization for photorealistic 3D scenes with complex material systems.</p>
+                        <ul class="details-info">
+                            <li>Client - <span>Visual Effects Studio</span></li>
+                            <li>Technologies - <span>Arnold, V-Ray, RenderMan</span></li>
+                            <li>Category - <span>CGI</span></li>
+                            <li>Quality - <span>8K Resolution</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Details Popup Modal -->
+        <div class="portfolio-popup">
+            <div class="portfolio-popup-inner">
+                <div class="portfolio-popup-close"><i class="ri-close-line"></i></div>
+                <div class="portfolio-popup-content grid">
+                    <img src="" alt="Popup Detail Image" class="portfolio-popup-img">
+                    <div class="portfolio-popup-info">
+                        <div class="portfolio-popup-subtitle">Featured - <span>VFX Work</span></div>
+                        <div class="portfolio-popup-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section class="services section" id="services">
+            <h2 class="section-title" data-heading="What I Offer">Services</h2>
+            <div class="services-container container grid">
+                <div class="services-content">
+                    <div>
+                        <i class="ri-vidicon-line services-icon"></i>
+                        <h3 class="services-title">Digital<br>Compositing</h3>
+                    </div>
+                    <span class="services-button">View More <i class="ri-arrow-right-line services-button-icon"></i></span>
+
+                    <div class="services-modal">
+                        <div class="services-modal-content">
+                            <div class="services-modal-close"><i class="ri-close-line"></i></div>
+                            <h3 class="services-modal-title">Digital Compositing</h3>
+                            <p class="services-modal-description">Professional node-based compositing with integration of CG elements, green screen keying, and complex visual effects.</p>
+                            <ul class="services-modal-services grid">
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Green screen keying & roto cleanup</p>
+                                </li>
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Multi-pass integration workflows</p>
+                                </li>
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Color correction & grading</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-content">
+                    <div>
+                        <i class="ri-cube-3d-line services-icon"></i>
+                        <h3 class="services-title">3D Tracking &<br>Matchmove</h3>
+                    </div>
+                    <span class="services-button">View More <i class="ri-arrow-right-line services-button-icon"></i></span>
+
+                    <div class="services-modal">
+                        <div class="services-modal-content">
+                            <div class="services-modal-close"><i class="ri-close-line"></i></div>
+                            <h3 class="services-modal-title">3D Tracking & Matchmove</h3>
+                            <p class="services-modal-description">Advanced 3D camera tracking and object matchmoving for seamless CG integration into live-action footage.</p>
+                            <ul class="services-modal-services grid">
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Camera motion tracking</p>
+                                </li>
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">3D object placement & tracking</p>
+                                </li>
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Solving & environment matchmove</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-content">
+                    <div>
+                        <i class="ri-image-add-line services-icon"></i>
+                        <h3 class="services-title">Motion Graphics &<br>Animation</h3>
+                    </div>
+                    <span class="services-button">View More <i class="ri-arrow-right-line services-button-icon"></i></span>
+
+                    <div class="services-modal">
+                        <div class="services-modal-content">
+                            <div class="services-modal-close"><i class="ri-close-line"></i></div>
+                            <h3 class="services-modal-title">Motion Graphics & Animation</h3>
+                            <p class="services-modal-description">Creative motion graphics, title sequences, and animated explainer videos for all media formats.</p>
+                            <ul class="services-modal-services grid">
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Title sequences & intros</p>
+                                </li>
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Character animation & rigging</p>
+                                </li>
+                                <li class="services-modal-service">
+                                    <i class="ri-checkbox-circle-line services-modal-icon"></i>
+                                    <p class="services-modal-info">Broadcast graphics & bumpers</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact section" id="contact">
+            <h2 class="section-title" data-heading="Get In Touch">Contact Me</h2>
+            <div class="contact-container container grid">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="ri-mail-line contact-card-icon"></i>
+                        <h3 class="contact-card-title">Email</h3>
+                        <span class="contact-card-data">akash@vfxportfolio.com</span>
+                        <span class="contact-button">Write Me <i class="ri-arrow-right-line contact-button-icon"></i></span>
+                    </div>
+                    <div class="contact-card">
+                        <i class="ri-phone-line contact-card-icon"></i>
+                        <h3 class="contact-card-title">Call</h3>
+                        <span class="contact-card-data">+1 (XXX) XXX-XXXX</span>
+                        <span class="contact-button">Call Me <i class="ri-arrow-right-line contact-button-icon"></i></span>
+                    </div>
+                </div>
+
+                <form action="" class="contact-form">
+                    <div class="input-container">
+                        <input type="text" class="input" required>
+                        <label>Your Name</label>
+                        <span>Your Name</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="email" class="input" required>
+                        <label>Your Email</label>
+                        <span>Your Email</span>
+                    </div>
+                    <div class="input-container textarea">
+                        <textarea class="input" required></textarea>
+                        <label>Your Message</label>
+                        <span>Your Message</span>
+                    </div>
+                    <button type="submit" class="button"><i class="ri-send-plane-line"></i> Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-bg">
+                <div class="footer-container container grid">
+                    <div>
+                        <h1 class="footer-title">Akash HARIHAR</h1>
+                        <span class="footer-subtitle">VFX Artist & Compositor</span>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="#about" class="footer-link">About</a></li>
+                        <li><a href="#work" class="footer-link">Portfolio</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                    </ul>
+                    <div class="footer-socials">
+                        <a href="https://www.linkedin.com/" class="footer-social"><i class="ri-linkedin-fill"></i></a>
+                        <a href="https://www.youtube.com/@FX_AKKUSH" class="footer-social"><i class="ri-youtube-fill"></i></a>
+                        <a href="https://www.instagram.com/" class="footer-social"><i class="ri-instagram-fill"></i></a>
+                    </div>
+                </div>
+                <p class="footer-copy">&#169; 2026. Designed & Built by <a href="#">Akash HARIHAR</a>. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Custom Interactivity Scripts -->
+    <script>
+        /* Sidebar Dynamic Display Mobile View */
+        const navToggle = document.getElementById('nav-toggle'),
+              sidebar = document.getElementById('sidebar'),
+              navClose = document.getElementById('nav-close');
+
+        if(navToggle && sidebar) {
+            navToggle.addEventListener('click', () => { sidebar.classList.add('show-sidebar'); });
+        }
+        if(navClose && sidebar) {
+            navClose.addEventListener('click', () => { sidebar.classList.remove('show-sidebar'); });
+        }
+
+        /* Navigation Link Active State */
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if(pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+                if(link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active-link');
+                }
+            });
+        });
+
+        /* Portfolio Modal Breakdown Dynamic Trigger */
+        document.addEventListener('click', (e) => {
+            if(e.target.classList.contains('work-button') || e.target.closest('.work-button')) {
+                const card = e.target.closest('.work-card');
+                const copyImg = card.querySelector('.work-img').src;
+                const detailsHTML = card.querySelector('.portfolio-item-details').innerHTML;
+                
+                const popup = document.querySelector('.portfolio-popup');
+                popup.querySelector('.portfolio-popup-img').src = copyImg;
+                popup.querySelector('.portfolio-popup-body').innerHTML = detailsHTML;
+                popup.classList.add('open');
+            }
+        });
+
+        document.querySelector('.portfolio-popup-close').addEventListener('click', () => {
+            document.querySelector('.portfolio-popup').classList.remove('open');
+        });
+
+        /* Services Modal Popup Interactivity Layout */
+        const modalViews = document.querySelectorAll('.services-modal'),
+              modalBtns = document.querySelectorAll('.services-button'),
+              modalCloses = document.querySelectorAll('.services-modal-close');
+
+        let openModal = function(modalIndex) { modalViews[modalIndex].classList.add('active-modal'); };
+
+        modalBtns.forEach((modalBtn, i) => {
+            modalBtn.addEventListener('click', () => { openModal(i); });
+        });
+
+        modalCloses.forEach((modalClose) => {
+            modalClose.addEventListener('click', () => {
+                modalViews.forEach((modalView) => { modalView.classList.remove('active-modal'); });
+            });
+        });
+
+        /* Skills Accordion Toggle */
+        const skillsHeaders = document.querySelectorAll('.skills-header');
+        skillsHeaders.forEach((header) => {
+            header.addEventListener('click', () => {
+                const targetId = header.getAttribute('data-target');
+                const allSkillsContents = document.querySelectorAll('[data-content]');
+                const targetContent = document.querySelector(targetId);
+                
+                allSkillsContents.forEach(content => {
+                    if(content !== targetContent) {
+                        content.classList.remove('skills-active');
+                        content.previousElementSibling.classList.remove('skills-active');
+                    }
+                });
+                
+                if(targetContent) {
+                    targetContent.classList.toggle('skills-active');
+                    header.classList.toggle('skills-active');
+                }
+            });
+        });
+
+        /* Input Float Field Focus Animations */
+        const inputs = document.querySelectorAll('.input');
+        function focusFunc() { let parent = this.parentNode; parent.classList.add('focus'); }
+        function blurFunc() { let parent = this.parentNode; if(this.value == "") { parent.classList.remove('focus'); } }
+        inputs.forEach(input => {
+            input.addEventListener('focus', focusFunc);
+            input.addEventListener('blur', blurFunc);
+        });
+    </script>
+</body>
+</html>
